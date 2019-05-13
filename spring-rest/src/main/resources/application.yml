@@ -1,7 +1,12 @@
 spring:
+  application:
+    name: spring-rest
   datasource:
     url: jdbc:postgresql://localhost/postgres
     username: postgres
-    password: password
+    password: mypgpass
   jpa:
-    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-master.xml

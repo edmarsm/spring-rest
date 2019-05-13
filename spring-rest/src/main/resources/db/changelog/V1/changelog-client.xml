@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+	
+	<!-- Inclui as properties comuns entre todos os arquivos -->
+	<include file="../changelog-properties.xml" relativeToChangelogFile="true"/>
+	
+	<changeSet id="client#201905120855" author="edmarsm">
+		<preConditions onFail="MARK_RAN" onSqlOutput="TEST">
+			<not>
+				<tableExists tableName="CLIENT" />
+			</not>
+		</preConditions>
+		<comment>Creating client table</comment>
+		<createTable tableName="CLIENT" tablespace="${DATA_TABLESPACE}" remarks="Client table">
+			<column name="ID" type="${int6}" remarks="Must have the client ID">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="CLIENT_PK" primaryKeyTablespace="${INDEX_TABLESPACE}"/>
+			</column>
+			<column name="NAME" type="varchar(200)" remarks="Must have the client name">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+		<rollback>
+			<dropTable tableName="CLIENT"/>
+		</rollback>
+	</changeSet>
+	
+	<changeSet id="client#201905120900" author="esmoreno">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<sequenceExists sequenceName="SEQ_CLIENT" />
+			</not>
+		</preConditions>
+		<comment>Creating client sequence</comment>
+		<createSequence sequenceName="SEQ_CLIENT" incrementBy="1" startValue="1" cycle="0" cacheSize="0"/>
+		<rollback>
+			<dropSequence sequenceName="SEQ_CLIENT"/>
+		</rollback>
+	</changeSet>
+	
+</databaseChangeLog>

@@ -19,8 +19,8 @@ public class ClientDto {
 		this.id = id;
 	}
 
-	@NotEmpty(message = "Client name could not be empty.")
-	@Length(min= 3, max = 200, message = "Client name must have between 3 and 200 characters.")
+	@NotEmpty
+	@Length(min= 2, max = 200)
 	public String getName() {
 		return name;
 	}

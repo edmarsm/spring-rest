@@ -25,7 +25,7 @@ public class ClientServiceTest {
 	private ClientRepository repository;
 	
 	@Test
-	public void mustReturnOneItemWhenCallingFindById() {
+	public void mustReturnOneItemWhenCallingFindByIdToValidId() {
 		// Scenario
 		Client client = new Client();
 		client.setId(1);
@@ -37,6 +37,6 @@ public class ClientServiceTest {
 		// Verifying
 		assertEquals(client, foundById.get());
 		Mockito.verify(repository, Mockito.atLeastOnce()).findById(Mockito.anyInt());
-		
 	}
+	
 }
